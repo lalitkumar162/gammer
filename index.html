@@ -5,7 +5,106 @@
 </head>
 <body>
 
-<h1>Hello World</h1>
+<script type="text/javascript">
+	var i = 1;
+	function createBlobs(){
+		var container = document.createElement('div');
+		document.querySelector('body').appendChild(container);
+		container.setAttribute("id", "demo");
+		for(i = 1;i < 100; i++) {
+			var elms = document.createElement('span');
+			container.appendChild(elms);
+			elms.setAttribute('class','circle');
+		}
+	}
+	function animateBlobs(color,size,positions){
+		var items = document.querySelector('#demo').childNodes,
+		arry = [];
+		for(i = 1;i < items.length;i++){
+			arry.push(i);
+		}
+		var item = arry[Math.floor(Math.random()*arry.length)];
+		items[item].style.transition = "all 3s ease-in-out";
+		items[item].style.backgroundColor = color;
+		items[item].style.width = items[item].style.height = ''+size+'px';
+		items[item].style.left = ''+positions.left+'px';
+		items[item].style.top = ''+positions.right+'px';	
 
+			
+
+		return;
+	}
+	function blobSize(){
+		var blobSizes = [];
+		for(i=40;i < 70;i++){
+			blobSizes.push(i);
+		}
+		return blobSizes[Math.floor(Math.random()*blobSizes.length)];
+	}
+	function blobPositions(){
+		var blobH = [];
+		var blobV = [];		
+		for(i=1;i < window.innerWidth;i++){
+			blobV.push(i);
+		}
+		for(i=1;i < window.innerHeight;i++){
+			blobH.push(i);
+		}		
+		var right =blobPositions[Math.floor(Math.random()*blobPositions.length)]
+		return  {
+		'left':blobV[Math.floor(Math.random()*blobV.length)],
+		'right':blobH[Math.floor(Math.random()*blobH.length)]
+		};	
+	}
+	function blobColor(){
+		var blobColors = ['#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#808000','#FFFF00','#800000','#FF0000'];
+		return blobColors[Math.floor(Math.random()*blobColors.length)];
+	}
+	createBlobs()
+	setInterval(function(){	
+	animateBlobs(blobColor(),blobSize(),blobPositions());
+	},30)
+</script>
+
+<style type="text/css">
+		.circle{border-radius:50%;position:absolute;opacity: .8;}
+	.circle:after {
+    width:10%;
+    height: 5px;
+    display: block;
+    content: '';
+    border-radius: 50%;
+    left:42%;
+    margin-left: -8px;
+    position: absolute;
+    top: 28%;
+    background: #000;
+    box-shadow: 16px 0px 0;
+}
+	.circle:before {
+	    content: '';
+    	animation: movelips 1s linear 1s infinite alternate;	    
+		 display: block;
+	    border-radius: 50%;
+	    height: 4px;
+	    width: 28%;
+	    position: absolute;
+	    background: #000;
+	    top: 62%;
+	    left: 33%;
+	} 
+	@keyframes movelips{
+		0%{
+			height: 1px;
+		}
+		50%{
+			height:6px;
+		}
+		100%{
+			height:4px;
+		}
+
+	}
+</style>
 </body>
 </html>
